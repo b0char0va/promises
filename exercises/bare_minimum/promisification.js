@@ -26,8 +26,20 @@ var getGitHubProfile = function(user, callback) {
     }
   });
 };
-
-var getGitHubProfileAsync; // TODO
+var getGitHubProfileAsync = Promise.promisify(getGitHubProfile);
+// var getGitHubProfileAsync = function(user) {
+//   return new Promise(function(resolve, reject) {
+//     getGitHubProfile(user, (err, response) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve(response);
+//       }
+//     });
+//   }).then( (response) => {
+//     return response;
+//   }); 
+// }; // TODO
 
 
 // (2) Asyncronous token generation
@@ -38,7 +50,20 @@ var generateRandomToken = function(callback) {
   });
 };
 
-var generateRandomTokenAsync; // TODO
+var generateRandomTokenAsync = Promise.promisify(generateRandomToken);
+// var generateRandomTokenAsync = function() {
+//   return new Promise(function(resolve, reject) {
+//     generateRandomToken( (err, response) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve(response);
+//       }
+//     });
+//   }).then( (response) => {
+//     return response;
+//   }); 
+// }; // TODO
 
 
 // (3) Asyncronous file manipulation
@@ -52,12 +77,27 @@ var readFileAndMakeItFunny = function(filePath, callback) {
       })
       .join('\n');
 
-    callback(funnyFile);
+    callback(null, funnyFile);
   });
 };
 
-var readFileAndMakeItFunnyAsync; // TODO
+var readFileAndMakeItFunnyAsync = Promise.promisify(readFileAndMakeItFunny);
 
+// var readFileAndMakeItFunnyAsync = function(filePath) {
+//   return new Promise(function(resolve, reject) {
+//     readFileAndMakeItFunny(filePath, (err, response) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         resolve(response);
+//       }
+//     });
+//   }).then( (response) => {
+//     return response;
+//   }).catch((err) =>{
+//     return err;
+//   }); // TODO
+// };
 // Export these functions so we can test them and reuse them in later exercises
 module.exports = {
   getGitHubProfileAsync: getGitHubProfileAsync,
